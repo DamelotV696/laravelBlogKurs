@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # === PHP + Apache (Laravel) ===
+  app:
+    image: php:8.2-apache
+    container_name: laravel_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - laravel_net
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+    command: >
+      bash -c "docker-php-ext-install pdo_mysql &&
+               sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf &&
+               sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf &&
+               apache2-foreground"
+
+  # === MySQL Database ===
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravelblog
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - laravel_net
+
+  # === PhpMyAdmin ===
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: laravel_phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+    networks:
+      - laravel_net
+
+networks:
+  laravel_net:
+    driver: bridge
