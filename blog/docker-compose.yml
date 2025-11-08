@@ -3,23 +3,19 @@ version: '3.8'
 services:
   # === PHP + Apache (Laravel) ===
   app:
-    image: php:8.2-apache
-    container_name: laravel_app
-    ports:
-      - "8000:80"
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/
     depends_on:
       - db
     networks:
       - laravel_net
-    environment:
-      APACHE_DOCUMENT_ROOT: /var/www/html/public
-    command: >
-      bash -c "docker-php-ext-install pdo_mysql &&
-               sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf &&
-               sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf &&
-               apache2-foreground"
+    container_name: laravel_app
+    ports:
+      - "8000:8000"
+    command: php artisan serve --host=0.0.0.0 --port=8000
 
   # === MySQL Database ===
   db:

@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Main\IndexController;
+use App\Http\Controllers\Main\indexController;
+use App\Http\Controllers\Admin\Main\AdminIndexController;
 
-Route::get('/', IndexController::class);
+Route::get('/', indexController::class);
 
 Auth::routes();
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', AdminIndexController::class);
+});
