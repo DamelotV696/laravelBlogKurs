@@ -92,6 +92,11 @@
       bsCustomFileInput.init();
     });
   </script>
+  <style>
+    .custom-file-input:lang(en)~.custom-file-lavel::after {
+      content: "...";
+    }
+  </style> 
 </body>
 
 </html>
