@@ -73,6 +73,7 @@
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
   <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
   <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
   <script>
     $('#summernote').summernote({
       toolbar: [
@@ -84,6 +85,11 @@
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']]
       ]
+    });
+  </script>
+  <script>
+    $(function () {
+      bsCustomFileInput.init();
     });
   </script>
 </body>
