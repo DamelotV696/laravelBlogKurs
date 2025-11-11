@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Category\StoreController;
 use App\Http\Controllers\Admin\Category\ShowController;
 use App\Http\Controllers\Admin\Category\EditController;
 use App\Http\Controllers\Admin\Category\UpdateController;
+use App\Http\Controllers\Admin\Category\DeleteController;
 use App\Models\Category;
 
 Route::get('/', indexController::class);
@@ -24,6 +25,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/', StoreController::class)->name('admin.category.store');
         Route::get('/{category}', ShowController::class)->name('admin.category.show');
         Route::get('/{category}/edit', EditController::class)->name('admin.category.edit');
-        Route::patch('/{category}', UpdateController::class)->name('admin.category.update');
+        Route::delete('/{category}', DeleteController::class)->name('admin.category.delete');
+        
     });
 });
