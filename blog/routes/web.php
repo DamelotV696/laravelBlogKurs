@@ -12,6 +12,16 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     Route::get('/', AdminIndexController::class);
 
+        // Посты
+    Route::prefix('posts')->namespace('App\\Http\\Controllers\\Admin\\Post')->group(function () {
+        Route::get('/', 'IndexController')->name('admin.post.index');
+        Route::get('/create', 'CreateController')->name('admin.post.create');
+        Route::post('/', 'StoreController')->name('admin.post.store');
+        Route::get('/{post}', 'ShowController')->name('admin.post.show');
+        Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
+        Route::delete('/{post}', 'DeleteController')->name('admin.post.delete');
+    });
+
     // Категории
     Route::prefix('categories')->namespace('App\\Http\\Controllers\\Admin\\Category')->group(function () {
         Route::get('/', 'CategoryIndexController')->name('admin.category.index');
