@@ -12,13 +12,14 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     Route::get('/', AdminIndexController::class);
 
-        // Посты
+    // Посты
     Route::prefix('posts')->namespace('App\\Http\\Controllers\\Admin\\Post')->group(function () {
         Route::get('/', 'IndexController')->name('admin.post.index');
         Route::get('/create', 'CreateController')->name('admin.post.create');
         Route::post('/', 'StoreController')->name('admin.post.store');
         Route::get('/{post}', 'ShowController')->name('admin.post.show');
         Route::get('/{post}/edit', 'EditController')->name('admin.post.edit');
+        Route::match(['put', 'patch'], '/{post}', 'UpdateController')->name('admin.post.update');
         Route::delete('/{post}', 'DeleteController')->name('admin.post.delete');
     });
 
@@ -29,6 +30,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/', 'StoreController')->name('admin.category.store');
         Route::get('/{category}', 'ShowController')->name('admin.category.show');
         Route::get('/{category}/edit', 'EditController')->name('admin.category.edit');
+        Route::match(['put', 'patch'], '/{category}', 'UpdateController')->name('admin.category.update');
         Route::delete('/{category}', 'DeleteController')->name('admin.category.delete');
     });
 
@@ -39,6 +41,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/', 'StoreController')->name('admin.tag.store');
         Route::get('/{tag}', 'ShowController')->name('admin.tag.show');
         Route::get('/{tag}/edit', 'EditController')->name('admin.tag.edit');
+        Route::match(['put', 'patch'], '/{tag}', 'UpdateController')->name('admin.tag.update');
         Route::delete('/{tag}', 'DeleteController')->name('admin.tag.delete');
     });
 });
