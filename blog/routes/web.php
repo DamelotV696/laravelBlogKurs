@@ -9,7 +9,7 @@ Route::get('/', IndexController::class);
 
 Auth::routes();
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::get('/', AdminIndexController::class);
 
     // Посты
