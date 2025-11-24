@@ -23,8 +23,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
+            'email' => 'required|string|email|unique:users,email,'.$this->user_id,
             'password' => 'required|string',
+            'user_id' => 'required|integer|exist:users,id',
+            'role' => 'required|integer',
         ];
     }
     public function messages(): array

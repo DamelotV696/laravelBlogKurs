@@ -24,6 +24,8 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
+            'role' => 'required|integer',
+
         ];
     }
     public function messages(): array
