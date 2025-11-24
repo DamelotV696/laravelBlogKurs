@@ -39,12 +39,12 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Название</th>
+                                            <th>Имя</th>
                                             <th colspan="3" class="text-center">Действие</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $user)
+                                        @foreach ($users as $user)
                                             <tr>
                                                 <td>{{ $user->id }}</td>
                                                 <td>{{ $user->name }}</td>

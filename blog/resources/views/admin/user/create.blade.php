@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Редактирование пользователя</h1>
+                        <h1 class="m-0">Добавление пользователя</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -26,18 +26,33 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.user.update',$user->id) }}" class="w-25" method="POST">
+                        <form action="{{ route('admin.user.store') }}" class="w-25" method="POST">
                             @csrf
-                            @method('PATCH')
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Название категории" name="name" value="{{ $user->name }}">
+                                <input type="text" class="form-control" placeholder="Имя пользователя" name="name">
                                 @error('name')
                                     <div class="text-danger">
-                                        Это поле необходимо для заполнения
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Обновить">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Email" name="email">
+                                @error('email')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Ваш пароль" name="password">
+                                @error('password')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Добавить">
                         </form>
                     </div>
                 </div>
