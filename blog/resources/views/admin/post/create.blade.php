@@ -33,7 +33,7 @@
                                     value="{{ old('title') }}">
                                 @error('title')
                                     <div class="text-danger">
-                                        Это поле необходимо для заполнения
+                                       {{ $message }}
                                     </div>
                                 @enderror
                             </div>
@@ -41,7 +41,7 @@
                                 <textarea id="summernote" name="content">{{ old('content') }}</textarea>
                                 @error('content')
                                     <div class="text-danger">
-                                        Это поле необходимо для заполнения
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 @error('preview_image')
                                     <div class="text-danger">
-                                        Это поле необходимо для заполнения
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>
@@ -75,7 +75,7 @@
                                 </div>
                                 @error('main_image')
                                     <div class="text-danger">
-                                        Это поле необходимо для заполнения
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>
@@ -86,7 +86,6 @@
                                         <option value="{{ $category->id }}" {{ $category->id == old('category_id') ? 'selected' : '' }}>
                                             {{ $category->title }}
                                         </option>
-
                                     @endforeach
                                 </select>
                             </div>
@@ -113,3 +112,4 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
+ 
