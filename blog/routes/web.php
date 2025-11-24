@@ -44,4 +44,15 @@ Route::prefix('admin')->group(function () {
         Route::match(['put', 'patch'], '/{tag}', 'UpdateController')->name('admin.tag.update');
         Route::delete('/{tag}', 'DeleteController')->name('admin.tag.delete');
     });
+    
+    // Пользователи
+    Route::prefix('users')->namespace('App\\Http\\Controllers\\Admin\\User')->group(function () {
+        Route::get('/', 'IndexController')->name('admin.user.index');
+        Route::get('/create', 'CreateController')->name('admin.user.create');
+        Route::post('/', 'StoreController')->name('admin.user.store');
+        Route::get('/{user}', 'ShowController')->name('admin.user.show');
+        Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
+        Route::match(['put', 'patch'], '/{user}', 'UpdateController')->name('admin.user.update');
+        Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
+    });
 });
