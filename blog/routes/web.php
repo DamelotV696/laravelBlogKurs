@@ -7,9 +7,9 @@ use App\Http\Controllers\Admin\Main\AdminIndexController;
 
 Route::get('/', IndexController::class);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth','admin','verified'])->group(function () {
     Route::get('/', AdminIndexController::class);
 
     // Посты
