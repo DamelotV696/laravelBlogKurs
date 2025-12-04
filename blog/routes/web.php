@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\Personal\Main\PersonalIndexController;
+use App\Http\Controllers\Personal\Main\IndexPersonalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminIndexController;
-use App\Http\Controllers\Personal\Comment\CommentIndexController;
-use App\Http\Controllers\Personal\Liked\LikedIndexController;
+use App\Http\Controllers\Personal\Comment\IndexCommentController;
+use App\Http\Controllers\Personal\Liked\DeleteLikedController;
+use App\Http\Controllers\Personal\Liked\IndexLikedController;
 
 Route::get('/', IndexController::class);
 
 Auth::routes(['verify' => true]);
 
 Route::prefix('personal')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', PersonalIndexController::class)->name('personal.main.index');
-    Route::get('/liked', LikedIndexController::class)->name('personal.liked.index');
-    Route::get('/comment', CommentIndexController::class)->name('personal.comment.index');
+    Route::get('/', IndexPersonalController::class)->name('personal.main.index');
+    Route::get('/liked', IndexLikedController::class)->name('personal.liked.index');
+    Route::get('/comment', IndexCommentController::class)->name('personal.comment.index');
+    Route::delete('/{post}', DeleteLikedController::class)->name('personal.delete.comment');
 });
 
 

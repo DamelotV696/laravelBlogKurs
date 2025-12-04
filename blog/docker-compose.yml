@@ -52,3 +52,6 @@ services:
 networks:
   laravel_net:
     driver: bridge
+
+
+#  docker-compose exec -it app bash

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Personal\Comment;
 
 use App\Http\Controllers\Controller;
 
-class CommentIndexController extends Controller
+class IndexCommentController extends Controller
 {
     public function __invoke()
     {
