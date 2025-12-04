@@ -11,8 +11,10 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.main.index') }}">Главная</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Категории</a></li>
+                            <li class="breadcrumb-item">Редактирование</li>
+                            <li class="breadcrumb-item active">{{ $category->title }}</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,11 +28,12 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.category.update',$category->id) }}" class="w-25" method="POST">
+                        <form action="{{ route('admin.category.update', $category->id) }}" class="w-25" method="POST">
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Название категории" name="title" value="{{ $category->title }}">
+                                <input type="text" class="form-control" placeholder="Название категории" name="title"
+                                    value="{{ $category->title }}">
                                 @error('title')
                                     <div class="text-danger">
                                         Это поле необходимо для заполнения

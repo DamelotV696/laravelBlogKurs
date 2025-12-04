@@ -10,7 +10,7 @@ Route::get('/', IndexController::class);
 Auth::routes(['verify' => true]);
 
 Route::prefix('admin')->middleware(['auth','admin','verified'])->group(function () {
-    Route::get('/', AdminIndexController::class);
+    Route::get('/', AdminIndexController::class)->name('admin.main.index');
 
     // Посты
     Route::prefix('posts')->namespace('App\\Http\\Controllers\\Admin\\Post')->group(function () {
