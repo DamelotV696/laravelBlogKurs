@@ -1,17 +1,27 @@
 <?php
 
+use App\Http\Controllers\Personal\Main\PersonalIndexController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminIndexController;
+use App\Http\Controllers\Personal\Comment\CommentIndexController;
+use App\Http\Controllers\Personal\Liked\LikedIndexController;
 
 Route::get('/', IndexController::class);
 
 Auth::routes(['verify' => true]);
 
-Route::prefix('admin')->middleware(['auth','admin','verified'])->group(function () {
-    Route::get('/', AdminIndexController::class)->name('admin.main.index');
+Route::prefix('personal')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', PersonalIndexController::class)->name('personal.main.index');
+    Route::get('/liked', LikedIndexController::class)->name('personal.liked.index');
+    Route::get('/comment', CommentIndexController::class)->name('personal.comment.index');
+});
 
+
+
+Route::prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function () {
+    Route::get('/', AdminIndexController::class)->name('admin.main.index');
     // Посты
     Route::prefix('posts')->namespace('App\\Http\\Controllers\\Admin\\Post')->group(function () {
         Route::get('/', 'IndexController')->name('admin.post.index');
@@ -44,7 +54,7 @@ Route::prefix('admin')->middleware(['auth','admin','verified'])->group(function 
         Route::match(['put', 'patch'], '/{tag}', 'UpdateController')->name('admin.tag.update');
         Route::delete('/{tag}', 'DeleteController')->name('admin.tag.delete');
     });
-    
+
     // Пользователи
     Route::prefix('users')->namespace('App\\Http\\Controllers\\Admin\\User')->group(function () {
         Route::get('/', 'IndexController')->name('admin.user.index');
