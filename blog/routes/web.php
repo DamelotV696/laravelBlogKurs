@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminIndexController;
+use App\Http\Controllers\Personal\Comment\DeleteCommentController;
+use App\Http\Controllers\Personal\Comment\EditCommentController;
 use App\Http\Controllers\Personal\Comment\IndexCommentController;
+use App\Http\Controllers\Personal\Comment\UpdateCommentController;
 use App\Http\Controllers\Personal\Liked\DeleteLikedController;
 use App\Http\Controllers\Personal\Liked\IndexLikedController;
 
@@ -16,8 +19,19 @@ Auth::routes(['verify' => true]);
 Route::prefix('personal')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', IndexPersonalController::class)->name('personal.main.index');
     Route::get('/liked', IndexLikedController::class)->name('personal.liked.index');
-    Route::get('/comment', IndexCommentController::class)->name('personal.comment.index');
-    Route::delete('/{post}', DeleteLikedController::class)->name('personal.delete.comment');
+    Route::delete('/{post}', DeleteLikedController::class)->name('personal.delete.like');
+
+    // Route::get('/comment', IndexCommentController::class)->name('personal.comment.index');
+    // Route::get('/{comment}/edite', EditCommentController::class)->name('personal.comment.edit');
+    // Route::patch('/{comment}', UpdateCommentController::class)->name('personal.update.comment');
+    // Route::delete('/{comment}', DeleteCommentController::class)->name('personal.delete.comment');
+
+    Route::prefix('comment')->namespace('App\\Http\\Controllers\\Personal\\Comment')->group(function () {
+        Route::get('/', 'IndexController')->name('personal.comment.index');
+        Route::get('/{comment}/edit', 'EditController')->name('personal.comment.edit');
+        Route::match(['put', 'patch'], '/{comment}', 'UpdateController')->name('personal.update.comment');
+        Route::delete('/{comment}', 'DeleteController')->name('personal.delete.comment');
+    });
 });
 
 

@@ -42,7 +42,7 @@
                                                 <td><a href="{{ route('admin.post.show', $post->id) }}"><i
                                                             class="far fa-eye"></i></a>
                                                 <td>
-                                                    <form action="{{ route('personal.delete.comment', $post->id) }}" method="post">
+                                                    <form action="{{ route('personal.delete.like', $post->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="border-0 bg-transparent">
