@@ -14,6 +14,7 @@ class Post extends Model
     protected $table = "posts";
 
     protected $withCount = ['likedUsers'];
+    protected $with = ['category'];
 
     public function tags()
     {
