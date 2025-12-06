@@ -28,6 +28,11 @@ Route::prefix('personal')->middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{comment}', 'DeleteController')->name('personal.delete.comment');
     });
 });
+Route::prefix('posts')->namespace('App\\Http\\Controllers\\Post')->group(function () {
+    Route::get('/', 'IndexController')->name('post.index');
+    Route::get('/{post}', 'ShowController')->name('post.show');
+});
+
 
 
 
