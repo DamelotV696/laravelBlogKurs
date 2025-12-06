@@ -31,7 +31,12 @@ Route::prefix('personal')->middleware(['auth', 'verified'])->group(function () {
 Route::prefix('posts')->namespace('App\\Http\\Controllers\\Post')->group(function () {
     Route::get('/', 'IndexController')->name('post.index');
     Route::get('/{post}', 'ShowController')->name('post.show');
+
+    Route::prefix('{post}/comments')->group(function () {
+        Route::post('/', 'Comment\\StoreController')->name('post.comment.store');
+    });
 });
+
 
 
 
